@@ -9,7 +9,7 @@
 @{
 
     # Script module or binary module file associated with this manifest.
-    # RootModule = ''
+    RootModule        = '.\PowerColorTerm.psm1'
 
     # Version number of this module.
     ModuleVersion     = '1.0.0'
@@ -33,7 +33,7 @@
     Description       = 'Helper for 24 bit text echo'
 
     # Minimum version of the PowerShell engine required by this module
-    PowerShellVersion = '7.0'
+    #PowerShellVersion = '7.0'
 
     # Name of the PowerShell host required by this module
     # PowerShellHostName = ''

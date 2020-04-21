@@ -26,14 +26,14 @@ function Convert-FromColorTag {
  .Description
   Converts a taged string to an ansi compatible 24-bit color string and returns the result.
   This function will match hex color codes and translate them into ansi 24 bit control chars.
-  Foreground colors start with fg:, Background colors start with bg. If a color reset inside the provided string is wanted [clc] can be used.
+  Foreground colors start with fg:, Background colors start with bg. If a color reset inside the provided string is wanted {clc} can be used.
   If both foreground and background color is used the foreground color must be first.
 
   .Parameter Data
   The tagged string to convert
 
   .Example
-    Get-RGB '{fg:#ff0000;bg:#ffffff}Kinda red[clc] {fg:#00ff00}Kinda green'
+    Get-RGB '{fg:#ff0000;bg:#ffffff}Kinda red{clc} {fg:#00ff00}Kinda green'
 #>
 function Get-RGB {
     param (
@@ -42,7 +42,7 @@ function Get-RGB {
     )
     $esc = [char]0x1b
     $endctl = "$esc[0;m"
-    [Regex]$tagpattern = '\{(fg:[#a-fA-F0-9]+)?;?(bg:[#a-fA-F0-9]+)?\}|(\[clc\])+?|([\w\s\d\,\!\@\#\$\%\^\&\*\(\)\~\:]+)'
+    [Regex]$tagpattern = '\{(fg:[#a-fA-F0-9]+)?;?(bg:[#a-fA-F0-9]+)?\}|(\{clc\})+?|([^\{\}]+)'
     $result = $tagpattern.Matches($data)
 
     $builder = [System.Text.StringBuilder]::new()
