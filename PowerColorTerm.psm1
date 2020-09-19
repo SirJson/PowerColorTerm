@@ -1,5 +1,19 @@
 # 24-bit color helper for Write-Host in PowerShell.
 
+<#
+ .Synopsis
+  Parses the content of a color tag and outputs the required control character.
+
+ .Description
+  This function will do the parsing and interpreting of color tag content. This is a private function and the user is not exposed to it.
+
+  .Parameter Data
+  A color tag without curly brackets.
+
+  .Example
+  Convert-FromColorTag 'fg:#fe00fe'
+
+#>
 function Convert-FromColorTag {
     param (
         [Parameter(Mandatory)]
@@ -21,19 +35,18 @@ function Convert-FromColorTag {
 
 <#
  .Synopsis
-  Converts a taged string to an ansi compatible 24-bit color string and returns the result.
+  Converts a tagged string to an ANSI compatible 24-bit color string and returns the result.
 
  .Description
-  Converts a taged string to an ansi compatible 24-bit color string and returns the result.
-  This function will match hex color codes and translate them into ansi 24 bit control chars.
-  Foreground colors start with fg:, Background colors start with bg. If a color reset inside the provided string is wanted {clc} can be used.
-  If both foreground and background color is used the foreground color must be first.
+  This function will match on hex color codes and translate them into ANSI 24 bit control character.
+  Foreground colors start with fg: and background colors start with bg. If a color reset inside the provided string is wanted {clc} can be used.
+  If both foreground and background color is used the foreground color must be declared first.
 
   .Parameter Data
-  The tagged string to convert
+  The tagged plain string you want to colorize
 
   .Example
-    Get-RGB '{fg:#ff0000;bg:#ffffff}Kinda red{clc} {fg:#00ff00}Kinda green'
+   Get-RGB '{fg:#ff0000;bg:#ffffff}Kinda red{clc} {fg:#00ff00}Kinda green'
 #>
 function Get-RGB {
     param (
@@ -67,20 +80,21 @@ function Get-RGB {
 
 <#
  .Synopsis
-  Converts a taged string to an ansi compatible 24-bit color string and prints the result via Write-Host.
+  Converts a tagged string to an ANSI compatible 24-bit color string and writes the result into stdout via Write-Host.
 
  .Description
-  Converts a taged string to an ansi compatible 24-bit color string and prints the result via Write-Host.
-  See Get-RGB() for information on how to tag the input string
+  Converts a tagged string to an ANSI compatible 24-bit color string and writes the result into stdout via Write-Host.
+  A color tag is always enclosed between two curly brackets. Color tags that change the foreground color start inside the color tag with fg: and continue with the desired color in hexadecimal RGB.
+  See Get-RGB() for a more detailed description and pitfalls on how to tag your input.
 
   .Parameter Data
-  The tagged string to convert
+  The string to colorize
 
   .Parameter nol
-  If set no new line will be printed
+   If this parameter is set, this command will **not** append your output with a newline character
 
   .Example
-    Write-RGB '{fg:#0000ff;bg:#fefefe}servus'
+    Write-RGB '{fg:#0000ff;bg:#fefefe}Blue?'
 #>
 function Write-RGB {
     param (
