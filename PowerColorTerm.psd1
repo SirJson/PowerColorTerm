@@ -33,7 +33,7 @@
     Description       = 'Helper for 24 bit text echo'
 
     # Minimum version of the PowerShell engine required by this module
-    #PowerShellVersion = '7.0'
+    PowerShellVersion = '6.0'
 
     # Name of the PowerShell host required by this module
     # PowerShellHostName = ''
@@ -87,7 +87,7 @@
     # ModuleList = @()
 
     # List of all files packaged with this module
-    FileList          = @(".\PowerColorTerm.psm1")
+    FileList          = @("PowerColorTerm.psm1")
 
     # Private data to pass to the module specified in RootModule/ModuleToProcess. This may also contain a PSData hashtable with additional module metadata used by PowerShell.
     PrivateData       = @{
@@ -104,7 +104,7 @@
             ProjectUri = 'https://github.com/SirJson/PowerColorTerm'
 
             # A URL to an icon representing this module.
-            IconUri    = '.\icon.png'
+            IconUri    = 'https://media.githubusercontent.com/media/SirJson/PowerColorTerm/master/icon.png'
 
             # ReleaseNotes of this module
             # ReleaseNotes = ''
